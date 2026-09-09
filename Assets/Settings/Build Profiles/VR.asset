@@ -22,6 +22,12 @@ MonoBehaviour:
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/Samples/Google Cardboard XR Plugin for Unity/1.34.0/Hello Cardboard/Scenes/HelloCardboard.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/VRMenu.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/Laberinto.unity
+  - m_enabled: 0
+    m_path: Assets/Scenes/VREjemplo.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
