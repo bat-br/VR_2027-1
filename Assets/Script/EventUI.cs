@@ -32,6 +32,16 @@ public class EventUI : MonoBehaviour
         //Actualizar la visibilidad de los objetos 
         UpdateVisibility();
     }
+    public void CycleObjectsBefore()
+    {
+        currentIndex = currentIndex - 1;// supongamos que es 0 cuando de -1 va entrar al if lo que hacer es mandarlo a el ultmo indice, y seguira restando hasta que se repita el ciclo
+        if (currentIndex < 0)
+        {
+            currentIndex = objects.Count - 1; 
+        }
+        UpdateVisibility();
+    }
+
     private void UpdateVisibility()
     {
         for (int i = 0; i<objects.Count;i++)
@@ -49,7 +59,16 @@ public class EventUI : MonoBehaviour
         //Actualizar el texto actual
         UpdateText(); 
     }
-
+    public void CycleTextBefore()
+    {
+        currentIndex = currentIndex - 1;
+        if(currentIndex<0)
+        {
+            currentIndex = messages.Count - 1;
+           
+        }
+        UpdateText();
+    }
     private void UpdateText()
     {
         if (messages.Count > 0 && textMeshPro != null)
