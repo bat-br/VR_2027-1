@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using JetBrains.Annotations;
 
 
 public class Labyrinthe : MonoBehaviour
@@ -47,14 +48,46 @@ public class Labyrinthe : MonoBehaviour
         winCanvas.SetActive(false);
 
         //Encontrar a los enemigos 
-
+        FindAllEnemies();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameWon) return;
+        Vector3 playerPos = player.transform.position;
+        bool playerCaught = false;
+        foreach(var agent in agents)
+        {
+            if(!agent.enabled) continue;
+            if ((agent.transform.position - playerPos).sqrMagnitude < detectionRangeSqr)
+            {
+                playerCaught = true; break;
+            }
+        }
+        //Si capturan al jugador
+        if(playerCaught)
+        {
+            TeleportPlayerToEntrance();
+            RelocateAllNPC();
+            return;
+        }
+        //Si el jugador llega al area de salida
+        if ((playerPos - exit.position).sqrMagnitude < exitRangeSqr)
+        {
+            WinGame();
+            return;
 
+        }
+        //Persecucion
+        foreach (var agent in agents)
+        {
+            if (agent.enabled && !agent.isStopped)
+            {
+                agent.SetDestination(playerPos);
+            }
+        }
     }
 
     //Metodo para regresar a la entrada
@@ -81,7 +114,7 @@ public class Labyrinthe : MonoBehaviour
     {
         gameWon = true;
 
-        foreach(var agent in agents)
+        foreach (var agent in agents)
         {
             agent.isStopped = true;
 
@@ -89,19 +122,57 @@ public class Labyrinthe : MonoBehaviour
 
         winCanvas.SetActive(true);
     }
-
-    //Encontrar todos los enemigos
-
-    void FindAllEnemies()
+    // Meotodo para posicionar a lo enemigos
+    public void RelocateAllNPC()
     {
-        agents.Clear();
-        foreach (var agent in FindObjectsByType<NavMeshAgent>(FindObjectsSortMode.None))
+        if (triangulation.vertices.Length == 0)
         {
-            if(agent.CompareTag("Enemy"))
-            {
-                agents.Add(agent);
-            }
+            return;
+        }
+        foreach (var agent in agents)
+        {
+            agent.enabled = false;
+            agent.transform.position =GetValidRandmPosition(); //Generar posición aleatoria
+            agent.enabled = true;
         }
     }
+    public Vector3 GetValidRandmPosition()
+    {
+        Vector3 pos;
+        do
+        {
+            int t= random.Next(0,triangulation.indices.Length/3)*3;
 
-}
+            Vector3 v1= triangulation.vertices[triangulation.indices[t]];
+            Vector3 v2 = triangulation.vertices[triangulation.indices[t+1]];
+            Vector3 v3 = triangulation.vertices[triangulation.indices[t+2]];
+            float r1 = (float)random.NextDouble();
+            float r2 = (float)random.NextDouble();
+            if(r1+r2>1f)
+            {
+                r1 = 1f - r1;
+                r2=1f-r2;
+            }
+            pos = v1+r1*(v2-v1)+r2*(v3-v1);
+        }
+        while ((pos - entrancePos).sqrMagnitude < minDistanceSqr);
+        return pos;
+
+    }
+        //Encontrar todos los enemigos
+
+        void FindAllEnemies()
+        {
+            agents.Clear();
+
+            foreach (var agent in FindObjectsByType<NavMeshAgent>(FindObjectsSortMode.None))
+            {
+                if (agent.CompareTag("Enemy"))
+                {
+                    agents.Add(agent);
+                }
+            }
+        }
+
+    }
+
