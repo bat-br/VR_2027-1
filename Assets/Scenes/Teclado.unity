@@ -197,9 +197,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnAutomaticHitTest:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 137669991}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -212,6 +209,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnAutomaticHitTest:
+    m_PersistentCalls:
+      m_Calls: []
   mDisplayAdvanced: 1
   mHitTestMode: 0
 --- !u!114 &137669994

@@ -1295,7 +1295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5501801747115825992, guid: d9e337dc6acbbda468331feab73252fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.69
+      value: 0.026
       objectReference: {fileID: 0}
     - target: {fileID: 5501801747115825992, guid: d9e337dc6acbbda468331feab73252fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1634,7 +1634,7 @@ Transform:
   m_GameObject: {fileID: 1699067738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.7, z: -0.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1775,6 +1775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2047235384}
   - component: {fileID: 2047235383}
+  - component: {fileID: 2047235385}
   m_Layer: 0
   m_Name: Controlador
   m_TagString: Untagged
@@ -1789,7 +1790,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047235382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c060f1cd744c5fb46a688f5184390961, type: 3}
   m_Name: 
@@ -1814,6 +1815,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047235385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047235382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bb41a3e7e65ce4da20c9be957bd228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputField: {fileID: 1013748198}
+  chatText: {fileID: 1566843363}
+  enviarButton: {fileID: 200199992}
+  modelName: gemini-3.8-flash
+  appCheckDebugToken: 
+  usarTokenDeUsoLimitado: 1
+  unityChanAnimator: {fileID: 1605560745}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

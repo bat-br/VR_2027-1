@@ -56,5 +56,50 @@ public class Piano : MonoBehaviour
                 }
             }
         }
+
+       else  if (Input.touchCount >0 && Input.touches[0].phase ==TouchPhase.Began)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                btnName = hit.collider.name;
+                switch (btnName)
+                {
+                    case "Do":
+                        audioSource.clip = audioClips[0];
+                        audioSource.Play();
+                        break;
+                    case "Re":
+                        audioSource.clip = audioClips[1];
+                        audioSource.Play();
+                        break;
+                    case "Mi":
+                        audioSource.clip = audioClips[2];
+                        audioSource.Play();
+                        break;
+                    case "Fa":
+                        audioSource.clip = audioClips[3];
+                        audioSource.Play();
+                        break;
+                    case "Sol":
+                        audioSource.clip = audioClips[4];
+                        audioSource.Play();
+                        break;
+                    case "La":
+                        audioSource.clip = audioClips[5];
+                        audioSource.Play();
+                        break;
+                    case "Si":
+                        audioSource.clip = audioClips[6];
+                        audioSource.Play();
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+        }
     }
+
 }
